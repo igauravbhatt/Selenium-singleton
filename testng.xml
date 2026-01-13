@@ -1,0 +1,10 @@
+<suite name="Regression">
+<parameter name="browser" value="chrome"></parameter>
+<parameter name="url" value="https://testautomationpractice.blogspot.com"></parameter>
+    <test name="Regression" thread-count="5" parallel="classes">
+        <classes>
+         <!--  <class name= "test.AutomationBasicTest" />-->
+            <class name= "test.AutomationBasicAdvance" />
+            </classes>
+        </test>
+    </suite>
