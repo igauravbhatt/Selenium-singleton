@@ -1,2 +1,5 @@
 target/
 .vscode/
+Default.rdp
+jenkins.bat
+/aws

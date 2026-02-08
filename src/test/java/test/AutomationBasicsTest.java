@@ -1,5 +1,6 @@
 package test;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 
@@ -33,8 +35,16 @@ public class AutomationBasicsTest {
         System.out.println("Title of the website: = " + driver.getTitle());
         
     }
+    @BeforeMethod
+    public void printmethod(Method method){
+        System.out.println("================ Started = "+method.getName()+" ================");
+    }
+    @AfterMethod
+    public void printmethod2(ITestResult result){
+        System.out.println("================ Ended = "+result.getMethod().getMethodName()+" ================");
+    }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void Textbox() {
         WebElement nametxtbox = driver.findElement(By.id("name"));
         nametxtbox.clear();
@@ -48,7 +58,7 @@ public class AutomationBasicsTest {
     }
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void radiobutton() throws Exception {
         WebElement Male = driver.findElement(By.xpath("//label[contains(.,'Male')]/preceding-sibling::*[1]"));
         WebElement Female = driver.findElement(By.xpath("//label[contains(.,'Female')]/preceding-sibling::*[1]"));
@@ -64,14 +74,14 @@ public class AutomationBasicsTest {
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkbox() {
         // input[@id='sunday']
         driver.findElement(By.xpath("//input[@id='sunday']")).click();
         driver.findElement(By.xpath("//input[@id='saturday']")).click();
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void dropdown() {
         WebElement dropdown = driver.findElement(By.xpath("//select[@id='country']"));
         Select select = new Select(dropdown);
@@ -82,7 +92,7 @@ public class AutomationBasicsTest {
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void multipleSelectDropdown() {
         WebElement mulSelDropdown = driver.findElement(By.xpath("//select[@id='colors']"));
         Select select = new Select(mulSelDropdown);
@@ -96,29 +106,29 @@ public class AutomationBasicsTest {
         }
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void dateSelector() throws InterruptedException {
 
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).click();
         String actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-        System.out.println(Year + "= Year = " + actualYear);
+        System.out.println("Expected Year = "+Year + "and Actual Year = " + actualYear);
         while (!actualYear.equals(Year)) {
 
             driver.findElement(By.xpath("//a[@title='Prev']")).click();
             actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-            System.out.println("hi");
+            
         }
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void enterDate() {
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).sendKeys(Month + "/" + Date + "/" + Year + "/");
         ;
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void enterDateType2() throws InterruptedException {
         String month = "3", Year = "2016", Date = "17";
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -142,11 +152,9 @@ public class AutomationBasicsTest {
         driver.findElement(By.xpath("//a[@class='ui-state-default' and text()='" + Date + "']")).click();
         Thread.sleep(5000);
         String dateselected = driver.findElement(By.xpath("//input[@id='txtDate']")).getAttribute("value");
-        System.out.println("dob is =" + dateselected);
+        System.out.println("dob is  =" + dateselected);
 
-    }
-
-    
+    }   
 
     @Test
     public void startDateEndDate() {
