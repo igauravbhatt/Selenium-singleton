@@ -153,7 +153,6 @@ public class AutomationBasicsTest {
         Thread.sleep(5000);
         String dateselected = driver.findElement(By.xpath("//input[@id='txtDate']")).getAttribute("value");
         System.out.println("dob is  =" + dateselected);
-
     }   
 
     @Test
