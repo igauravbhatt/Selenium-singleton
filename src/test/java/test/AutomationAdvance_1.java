@@ -76,8 +76,11 @@ public class AutomationAdvance_1 {
             case "chrome":
                 
                 ChromeOptions options = new ChromeOptions();            
-                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--window-size=1366,768");
                 driver = new ChromeDriver(options);
+                ((JavascriptExecutor) driver)
+                .executeScript("document.body.style.zoom='50%'");
+
 
                 break;
             case "edge":
