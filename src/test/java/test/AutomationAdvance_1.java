@@ -76,19 +76,19 @@ public class AutomationAdvance_1 {
             case "chrome":
                 
                 ChromeOptions options = new ChromeOptions();            
-                options.addArguments("--windows-size-1920,1080");
+                options.addArguments("--windows-size=1920,1080");
                 driver = new ChromeDriver(options);
 
                 break;
             case "edge":
                 EdgeOptions eoptions = new EdgeOptions();
-                eoptions.addArguments("--windows-size-1920,1080");
+                eoptions.addArguments("--windows-size=1920,1080");
                 driver = new EdgeDriver(eoptions);
                 
                 break;
             case "firefox":
                 FirefoxOptions ffoptions = new FirefoxOptions();
-                ffoptions.addArguments("--windows-size-1920,1080");
+                ffoptions.addArguments("--windows-size=1920,1080");
                 driver = new FirefoxDriver(ffoptions);
                 break;
 
