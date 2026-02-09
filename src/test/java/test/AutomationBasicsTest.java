@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,9 +28,21 @@ public class AutomationBasicsTest {
 
     @BeforeClass
     public void setup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--windows-size-1920,1080");
-        driver = new ChromeDriver(options);
+       ChromeOptions options = new ChromeOptions();
+
+                // 🔴 THIS LINE IS NON-NEGOTIABLE
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+                // server-safe options
+                options.addArguments("--window-size=1366,768");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+
+              driver = new ChromeDriver(options);
+
+                // fail fast instead of hanging
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().timeouts().implicitlyWait(time);
         driver.get("https://testautomationpractice.blogspot.com/");
 

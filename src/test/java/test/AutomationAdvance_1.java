@@ -58,49 +58,41 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-
-
 public class AutomationAdvance_1 {
     WebDriver driver;
     String oldUrl;
     SoftAssert soft = new SoftAssert();
-    
-    
-       
-        
 
     @BeforeClass
     @Parameters({ "browser", "url" })
     public void setup(String browser, String urlp) {
-    
+
         switch (browser) {
             case "chrome":
-                
-                ChromeOptions options = new ChromeOptions();            
-             
-// 🔴 THIS LINE IS NON-NEGOTIABLE
-options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-// server-safe options
-options.addArguments("--window-size=1366,768");
-options.addArguments("--disable-gpu");
-options.addArguments("--no-sandbox");
-options.addArguments("--disable-dev-shm-usage");
+                ChromeOptions options = new ChromeOptions();
 
-WebDriver driver = new ChromeDriver(options);
+                // 🔴 THIS LINE IS NON-NEGOTIABLE
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-// fail fast instead of hanging
-driver.manage().timeouts()
-      .pageLoadTimeout(Duration.ofSeconds(60));
-                
+                // server-safe options
+                options.addArguments("--window-size=1366,768");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
 
+                WebDriver driver = new ChromeDriver(options);
+
+                // fail fast instead of hanging
+                driver.manage().timeouts()
+                        .pageLoadTimeout(Duration.ofSeconds(60));
 
                 break;
             case "edge":
                 EdgeOptions eoptions = new EdgeOptions();
                 eoptions.addArguments("--window-size=1920,1080");
                 driver = new EdgeDriver(eoptions);
-                
+
                 break;
             case "firefox":
                 FirefoxOptions ffoptions = new FirefoxOptions();
@@ -125,7 +117,8 @@ driver.manage().timeouts()
     @Test(enabled = false)
     public void uploadFiles() {
         driver.findElement(By.id("singleFileInput")).sendKeys("C:\\Users\\dell\\Desktop\\Navya\\rb.png");
-        driver.findElement(By.id("multipleFilesInput")).sendKeys("C:\\Users\\dell\\Deskto\\Navya\\rb.png\\n" + "C:\\Users\\dell\\Desktop\\Navya\\hero.png");
+        driver.findElement(By.id("multipleFilesInput"))
+                .sendKeys("C:\\Users\\dell\\Deskto\\Navya\\rb.png\\n" + "C:\\Users\\dell\\Desktop\\Navya\\hero.png");
         driver.findElement(By.xpath("//button[@type='submit' and contains(.,'Single')]")).click();
         driver.findElement(By.xpath("//button[@type='submit' and contains(.,'Multiple')]")).click();
         By locator = By.id("singleFileStatus");
@@ -737,7 +730,7 @@ driver.manage().timeouts()
 
     @Test(enabled = true)
     public void dropdown() throws InterruptedException {
-        //way1 not loads scans and load next batch no repeatative
+        // way1 not loads scans and load next batch no repeatative
         WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         driver.findElement(By.xpath("//input[@id='comboBox']")).click();
