@@ -37,14 +37,7 @@ public class AutomationBasicsTest {
         System.out.println("Title of the website: = " + driver.getTitle());
         
     }
-    @BeforeMethod
-    public void printmethod(Method method){
-        System.out.println("================ Started = "+method.getName()+" ================");
-    }
-    @AfterMethod
-    public void printmethod2(ITestResult result){
-        System.out.println("================ Ended = "+result.getMethod().getMethodName()+" ================");
-    }
+
 
     @Test(enabled = true)
     public void Textbox(Method method){
