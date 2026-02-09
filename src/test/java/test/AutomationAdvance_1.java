@@ -43,9 +43,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,25 +57,39 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
+
+
 public class AutomationAdvance_1 {
     WebDriver driver;
     String oldUrl;
     SoftAssert soft = new SoftAssert();
+    
+    
+       
+        
 
     @BeforeClass
     @Parameters({ "browser", "url" })
     public void setup(String browser, String urlp) {
-
+    
         switch (browser) {
             case "chrome":
-                driver = new ChromeDriver();
+                
+                ChromeOptions options = new ChromeOptions();            
+                options.addArguments("--windows-size-1920,1080");
+                driver = new ChromeDriver(options);
 
                 break;
             case "edge":
-                driver = new EdgeDriver();
+                EdgeOptions eoptions = new EdgeOptions();
+                eoptions.addArguments("--windows-size-1920,1080");
+                driver = new EdgeDriver(eoptions);
+                
                 break;
             case "firefox":
-                driver = new FirefoxDriver();
+                FirefoxOptions ffoptions = new FirefoxOptions();
+                ffoptions.addArguments("--windows-size-1920,1080");
+                driver = new FirefoxDriver(ffoptions);
                 break;
 
             default:

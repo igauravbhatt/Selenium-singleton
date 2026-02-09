@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,8 +27,9 @@ public class AutomationBasicsTest {
 
     @BeforeClass
     public void setup() {
-
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--windows-size-1920,1080");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(time);
         driver.get("https://testautomationpractice.blogspot.com/");
 
@@ -45,7 +47,8 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
-    public void Textbox() {
+    public void Textbox(Method method){
+    System.out.println("================ Started = "+method.getName()+" ================"); 
         WebElement nametxtbox = driver.findElement(By.id("name"));
         nametxtbox.clear();
         nametxtbox.sendKeys("Demo");
@@ -59,7 +62,8 @@ public class AutomationBasicsTest {
 
 
     @Test(enabled = true)
-    public void radiobutton() throws Exception {
+    public void radiobutton(Method method) throws Exception {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         WebElement Male = driver.findElement(By.xpath("//label[contains(.,'Male')]/preceding-sibling::*[1]"));
         WebElement Female = driver.findElement(By.xpath("//label[contains(.,'Female')]/preceding-sibling::*[1]"));
 
@@ -75,14 +79,16 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
-    public void checkbox() {
+    public void checkbox(Method method) {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         // input[@id='sunday']
         driver.findElement(By.xpath("//input[@id='sunday']")).click();
         driver.findElement(By.xpath("//input[@id='saturday']")).click();
     }
 
     @Test(enabled = true)
-    public void dropdown() {
+    public void dropdown(Method method) {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         WebElement dropdown = driver.findElement(By.xpath("//select[@id='country']"));
         Select select = new Select(dropdown);
         System.out.println("executed");
@@ -93,7 +99,8 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
-    public void multipleSelectDropdown() {
+    public void multipleSelectDropdown(Method method) {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         WebElement mulSelDropdown = driver.findElement(By.xpath("//select[@id='colors']"));
         Select select = new Select(mulSelDropdown);
         if (select.isMultiple()) {
@@ -107,8 +114,8 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
-    public void dateSelector() throws InterruptedException {
-
+    public void dateSelector(Method method) throws InterruptedException {
+System.out.println("================ Started = "+method.getName()+" ================"); 
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).click();
         String actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
         System.out.println("Expected Year = "+Year + "and Actual Year = " + actualYear);
@@ -122,14 +129,16 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
-    public void enterDate() {
+    public void enterDate(Method method) {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).sendKeys(Month + "/" + Date + "/" + Year + "/");
         ;
 
     }
 
     @Test(enabled = true)
-    public void enterDateType2() throws InterruptedException {
+    public void enterDateType2(Method method) throws InterruptedException {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         String month = "3", Year = "2016", Date = "17";
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.xpath("//input[@name='SelectedDate']")).click();
@@ -156,7 +165,8 @@ public class AutomationBasicsTest {
     }   
 
     @Test
-    public void startDateEndDate() {
+    public void startDateEndDate(Method method) {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         // way 1
         driver.findElement(By.xpath("//input[@id='start-date']")).sendKeys("03-09-1990");
         driver.findElement(By.xpath("//input[@id='end-date']")).sendKeys("04-12-2025");
@@ -171,8 +181,8 @@ public class AutomationBasicsTest {
     }
 
     @Test(dependsOnMethods = "startDateEndDate")
-    public void reverseWords() {
-
+    public void reverseWords(Method method) {
+System.out.println("================ Started = "+method.getName()+" ================"); 
         String[] series = daysResult.split(" ");
         
         for(int i=series.length-1;i>=0;i--){
@@ -194,7 +204,8 @@ System.out.print("");
     }
 
     @AfterClass(enabled = true)
-    public void teardown() throws InterruptedException {
+    public void teardown(Method method) throws InterruptedException {
+        System.out.println("================ Started = "+method.getName()+" ================"); 
         //Thread.sleep(15000);
         System.out.println("Basic Test Ended");
         driver.quit();
