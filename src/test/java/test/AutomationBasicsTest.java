@@ -176,6 +176,7 @@ System.out.println("================ Started = "+method.getName()+" ============
         // way 1
         driver.findElement(By.xpath("//input[@id='start-date']")).sendKeys("03-09-1990");
         driver.findElement(By.xpath("//input[@id='end-date']")).sendKeys("04-12-2025");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='submit-btn']")));
         driver.findElement(By.xpath("//button[@class='submit-btn']")).click();
 
         daysResult = driver.findElement(By.id("result")).getText();
