@@ -189,7 +189,7 @@ System.out.println("================ Started = "+method.getName()+" ============
 
     @Test(dependsOnMethods = "startDateEndDate")
     public void reverseWords(Method method) {
-System.out.println("================ Started = "+method.getName()+" ================"); 
+System.out.println("================ Started = "+method.getName()+" =======+========="); 
         String[] series = daysResult.split(" ");
         
         for(int i=series.length-1;i>=0;i--){
