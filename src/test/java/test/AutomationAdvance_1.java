@@ -41,6 +41,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver.Options;
@@ -76,10 +77,22 @@ public class AutomationAdvance_1 {
             case "chrome":
                 
                 ChromeOptions options = new ChromeOptions();            
-                options.addArguments("--window-size=1366,768");
-                driver = new ChromeDriver(options);
-                ((JavascriptExecutor) driver)
-                .executeScript("document.body.style.zoom='50%'");
+             
+// 🔴 THIS LINE IS NON-NEGOTIABLE
+options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+// server-safe options
+options.addArguments("--window-size=1366,768");
+options.addArguments("--disable-gpu");
+options.addArguments("--no-sandbox");
+options.addArguments("--disable-dev-shm-usage");
+
+WebDriver driver = new ChromeDriver(options);
+
+// fail fast instead of hanging
+driver.manage().timeouts()
+      .pageLoadTimeout(Duration.ofSeconds(60));
+                
 
 
                 break;
@@ -104,6 +117,7 @@ public class AutomationAdvance_1 {
         driver.get(urlp);
         System.out.println(browser + " launched with " + urlp);
         driver.manage().window().maximize();
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='50%'");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
     }
@@ -111,8 +125,7 @@ public class AutomationAdvance_1 {
     @Test(enabled = false)
     public void uploadFiles() {
         driver.findElement(By.id("singleFileInput")).sendKeys("C:\\Users\\dell\\Desktop\\Navya\\rb.png");
-        driver.findElement(By.id("multipleFilesInput"))
-                .sendKeys("C:\\Users\\dell\\Deskto\\Navya\\rb.png\\n" + "C:\\Users\\dell\\Desktop\\Navya\\hero.png");
+        driver.findElement(By.id("multipleFilesInput")).sendKeys("C:\\Users\\dell\\Deskto\\Navya\\rb.png\\n" + "C:\\Users\\dell\\Desktop\\Navya\\hero.png");
         driver.findElement(By.xpath("//button[@type='submit' and contains(.,'Single')]")).click();
         driver.findElement(By.xpath("//button[@type='submit' and contains(.,'Multiple')]")).click();
         By locator = By.id("singleFileStatus");
@@ -120,7 +133,6 @@ public class AutomationAdvance_1 {
         WebElement singleFileStatus = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         System.out.println(singleFileStatus.getText());
         Assert.assertTrue(singleFileStatus.getText().contains("file selected:"));
-
     }
 
     @Test(enabled = false)
