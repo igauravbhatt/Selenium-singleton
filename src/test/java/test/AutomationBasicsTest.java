@@ -20,7 +20,7 @@ public class AutomationBasicsTest {
     
     WebDriver driver;
     Duration time = Duration.ofSeconds(5);
-    String Year = "2020";
+    String Year = "2024";
     String Month = "04";
     String Date = "17";
     String daysResult;
@@ -209,7 +209,7 @@ System.out.println("Reverse");
 System.out.print("");
     }
 
-    @AfterClass(enabled = true)
+    @AfterClass(enabled = false)
     public void teardown(Method method) throws InterruptedException {
         System.out.println("================ Started = "+method.getName()+" ================"); 
         //Thread.sleep(15000);
