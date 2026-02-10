@@ -219,7 +219,7 @@ public class AutomationBasicsTest {
         System.out.print("");
     }
 
-    @AfterClass(enabled = false)
+    @AfterClass(enabled = true)
     public void teardown(Method method) throws InterruptedException {
         System.out.println("================ Started = " + method.getName() + " ================");
         // Thread.sleep(15000);
