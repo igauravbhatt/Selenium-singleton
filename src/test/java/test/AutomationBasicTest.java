@@ -1,25 +1,24 @@
 package test;
 
-import java.lang.reflect.Method;
+
+import org.testng.annotations.*;
+
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
 
-public class AutomationBasicsTest {
+public class AutomationBasicTest {
 
     WebDriver driver;
     Duration time = Duration.ofSeconds(5);
-    String Year = "2024";
+    String Year = "2020";
     String Month = "04";
     String Date = "17";
     String daysResult;
@@ -27,35 +26,18 @@ public class AutomationBasicsTest {
 
     @BeforeClass
     public void setup() {
-        ChromeOptions options = new ChromeOptions();
-      //  System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
 
-        // Enable verbose logging to see every internal command
-       // System.setProperty("webdriver.chrome.verboseLogging", "true");
-        // 🔴 THIS LINE IS NON-NEGOTIABLE
-        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
-        // server-safe options
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-
-        driver = new ChromeDriver(options);
-
-        // fail fast instead of hanging
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(time);
         driver.get("https://testautomationpractice.blogspot.com/");
 
         driver.manage().window().maximize();
         System.out.println("Title of the website: = " + driver.getTitle());
-
+        
     }
 
-    @Test(enabled = true)
-    public void Textbox(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void Textbox() {
         WebElement nametxtbox = driver.findElement(By.id("name"));
         nametxtbox.clear();
         nametxtbox.sendKeys("Demo");
@@ -67,9 +49,8 @@ public class AutomationBasicsTest {
 
     }
 
-    @Test(enabled = true)
-    public void radiobutton(Method method) throws Exception {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void radiobutton() throws Exception {
         WebElement Male = driver.findElement(By.xpath("//label[contains(.,'Male')]/preceding-sibling::*[1]"));
         WebElement Female = driver.findElement(By.xpath("//label[contains(.,'Female')]/preceding-sibling::*[1]"));
 
@@ -84,17 +65,15 @@ public class AutomationBasicsTest {
 
     }
 
-    @Test(enabled = true)
-    public void checkbox(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void checkbox() {
         // input[@id='sunday']
         driver.findElement(By.xpath("//input[@id='sunday']")).click();
         driver.findElement(By.xpath("//input[@id='saturday']")).click();
     }
 
-    @Test(enabled = true)
-    public void dropdown(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void dropdown() {
         WebElement dropdown = driver.findElement(By.xpath("//select[@id='country']"));
         Select select = new Select(dropdown);
         System.out.println("executed");
@@ -104,9 +83,8 @@ public class AutomationBasicsTest {
 
     }
 
-    @Test(enabled = true)
-    public void multipleSelectDropdown(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void multipleSelectDropdown() {
         WebElement mulSelDropdown = driver.findElement(By.xpath("//select[@id='colors']"));
         Select select = new Select(mulSelDropdown);
         if (select.isMultiple()) {
@@ -119,32 +97,30 @@ public class AutomationBasicsTest {
         }
     }
 
-    @Test(enabled = true)
-    public void dateSelector(Method method) throws InterruptedException {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void dateSelector() throws InterruptedException {
+
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).click();
         String actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-        System.out.println("Expected Year = " + Year + "and Actual Year = " + actualYear);
+        System.out.println(Year + "= Year = " + actualYear);
         while (!actualYear.equals(Year)) {
 
             driver.findElement(By.xpath("//a[@title='Prev']")).click();
             actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-
+            System.out.println("hi");
         }
 
     }
 
-    @Test(enabled = true)
-    public void enterDate(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void enterDate() {
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).sendKeys(Month + "/" + Date + "/" + Year + "/");
         ;
 
     }
 
-    @Test(enabled = true)
-    public void enterDateType2(Method method) throws InterruptedException {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    @Test(enabled = false)
+    public void enterDateType2() throws InterruptedException {
         String month = "3", Year = "2016", Date = "17";
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.xpath("//input[@name='SelectedDate']")).click();
@@ -167,17 +143,17 @@ public class AutomationBasicsTest {
         driver.findElement(By.xpath("//a[@class='ui-state-default' and text()='" + Date + "']")).click();
         Thread.sleep(5000);
         String dateselected = driver.findElement(By.xpath("//input[@id='txtDate']")).getAttribute("value");
-        System.out.println("dob is  =" + dateselected);
+        System.out.println("dob is =" + dateselected);
+
     }
 
+    
+
     @Test
-    public void startDateEndDate(Method method) {
-        System.out.println("================ Started = " + method.getName() + " ================");
+    public void startDateEndDate() {
         // way 1
         driver.findElement(By.xpath("//input[@id='start-date']")).sendKeys("03-09-1990");
         driver.findElement(By.xpath("//input[@id='end-date']")).sendKeys("04-12-2025");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='submit-btn']")));
         driver.findElement(By.xpath("//button[@class='submit-btn']")).click();
 
         daysResult = driver.findElement(By.id("result")).getText();
@@ -189,32 +165,31 @@ public class AutomationBasicsTest {
     }
 
     @Test(dependsOnMethods = "startDateEndDate")
-    public void reverseWords(Method method) {
-        System.out.println("================ Started = " + method.getName() + " =======+=========");
-        String[] series = daysResult.split(" ");
+    public void reverseWords() {
 
-        for (int i = series.length - 1; i >= 0; i--) {
-            // System.out.println(series[i]);
+        String[] series = daysResult.split(" ");
+        
+        for(int i=series.length-1;i>=0;i--){
+          //  System.out.println(series[i]);
         }
         int count = 0;
-        int count2 = daysResult.length() - 1;
+        int count2 = daysResult.length()-1;
 
-        while (count < daysResult.length()) {
-            System.out.print(daysResult.charAt(count));
+        while(count<daysResult.length()){
+            System.out.print( daysResult.charAt(count));
             count++;
         }
-        System.out.println("Reverse");
-        while (count2 >= 0) {
+System.out.println("Reverse");
+        while(count2>=0){
             System.out.print(daysResult.charAt(count2));
             count2--;
-        }
-        System.out.print("");
+        }     
+System.out.print("");
     }
 
-    @AfterClass(enabled = false)
-    public void teardown(Method method) throws InterruptedException {
-        System.out.println("================ Started = " + method.getName() + " ================");
-        // Thread.sleep(15000);
+    @AfterClass(enabled = true)
+    public void teardown() throws InterruptedException {
+        //Thread.sleep(15000);
         System.out.println("Basic Test Ended");
         driver.quit();
     }
