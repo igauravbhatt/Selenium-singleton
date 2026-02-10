@@ -4,11 +4,14 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.idealized.Javascript;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,7 +50,7 @@ public class AutomationBasicsTest {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().timeouts().implicitlyWait(time);
         driver.get("https://testautomationpractice.blogspot.com/");
-
+((JavascriptExecutor) driver).executeScript("document.body.style.zoom='50%'");
         driver.manage().window().maximize();
         System.out.println("Title of the website: = " + driver.getTitle());
 
@@ -176,9 +179,14 @@ public class AutomationBasicsTest {
         // way 1
         driver.findElement(By.xpath("//input[@id='start-date']")).sendKeys("03-09-1990");
         driver.findElement(By.xpath("//input[@id='end-date']")).sendKeys("04-12-2025");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement submitbtn = driver.findElement(By.xpath("//button[@class='submit-btn']"));
+        js.executeScript("arguments[0].scrollIntoView(true);", submitbtn);
+
+        
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='submit-btn']")));
-        driver.findElement(By.xpath("//button[@class='submit-btn']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(submitbtn));
+        submitbtn.click();
 
         daysResult = driver.findElement(By.id("result")).getText();
         String numbers = daysResult.replaceAll("\\D", "");
