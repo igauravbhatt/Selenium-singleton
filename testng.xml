@@ -4,7 +4,7 @@
     <test name="Regression" thread-count="1" parallel="false">
         <classes>
           <class name= "test.AutomationBasicsTest" />
-           <!--  <class name= "test.AutomationAdvance_1" />-->
+         <class name= "test.AutomationAdvance_1" />
             
            <!-- <class name= "test.AutomationAdvance_Rest" />-->
             </classes>
