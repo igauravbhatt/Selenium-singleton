@@ -83,6 +83,11 @@ public class AutomationAdvance_1 {
                 options.addArguments("--disable-gpu");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--headless=new");   // 🔥 VERY IMPORTANT
+                 options.addArguments("--disable-extensions");
+                 options.addArguments("--disable-infobars");
+                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
 
                 driver = new ChromeDriver(options);
 
