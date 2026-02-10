@@ -189,9 +189,11 @@ System.out.print("");
 
     @AfterClass(enabled = true)
     public void teardown() throws InterruptedException {
-        //Thread.sleep(15000);
-        System.out.println("Basic Test Ended");
+       System.out.println("Advance test ended");
+
+    if (driver != null) {
         driver.quit();
-    }
+        driver = null;
+    }}
 
 }
