@@ -117,7 +117,7 @@ public class AutomationAdvance_1 {
         driver.get(urlp);
         System.out.println(browser + " launched with " + urlp);
         driver.manage().window().maximize();
-        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='50%'");
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='10%'");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
     }
@@ -412,10 +412,12 @@ public class AutomationAdvance_1 {
 
     @AfterClass(enabled = true)
     public void teardown() throws InterruptedException {
-        // Thread.sleep(15000);
-        System.out.println("Advance test ended");
+       System.out.println("Advance test ended");
+
+    if (driver != null) {
         driver.quit();
-    }
+        driver = null;
+    }}
 
     @Test(enabled = false)
     public void fileReader2() throws IOException {
