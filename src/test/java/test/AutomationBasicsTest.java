@@ -127,7 +127,7 @@ public class AutomationBasicsTest {
         System.out.println("================ Started = " + method.getName() + " ================");
         driver.findElement(By.xpath("//input[@id=\"datepicker\"]")).click();
         String actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-        System.out.println("Expected Year = " + Year + "and Actual Year = " + actualYear);
+        System.out.println("User Expected Year = " + Year + " and Actual Year = " + actualYear);
         while (!actualYear.equals(Year)) {
 
             driver.findElement(By.xpath("//a[@title='Prev']")).click();
