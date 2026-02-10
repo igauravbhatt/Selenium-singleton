@@ -69,7 +69,10 @@ public class AutomationAdvance_1 {
 
         switch (browser) {
             case "chrome":
+            System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
 
+// Enable verbose logging to see every internal command
+System.setProperty("webdriver.chrome.verboseLogging", "true");
                 ChromeOptions options = new ChromeOptions();
 
                 // 🔴 THIS LINE IS NON-NEGOTIABLE
@@ -81,7 +84,7 @@ public class AutomationAdvance_1 {
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
 
-                WebDriver driver = new ChromeDriver(options);
+               driver = new ChromeDriver(options);
 
                 // fail fast instead of hanging
                 driver.manage().timeouts()
