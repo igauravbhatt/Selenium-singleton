@@ -43,7 +43,7 @@ public class AutomationBasicsTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-       // options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
         //options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime());
 
         driver = new ChromeDriver(options);
