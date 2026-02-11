@@ -223,10 +223,10 @@ public class AutomationBasicsTest {
 
     @AfterClass(enabled = true)
     public void teardown(Method method) throws InterruptedException {
-        System.out.println("================ Started = " + method.getName() + " ================");
-        // Thread.sleep(15000);
-        System.out.println("Basic Test Ended");
+          System.out.println("Basic test ended");
+       if (driver != null) {
         driver.quit();
-    }
+        driver = null;
+    }}
 
 }
