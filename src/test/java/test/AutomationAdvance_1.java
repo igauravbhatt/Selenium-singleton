@@ -118,7 +118,7 @@ public class AutomationAdvance_1 {
         driver.get(urlp);
         System.out.println(browser + " launched with " + urlp);
         driver.manage().window().maximize();
-        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='10%'");
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
     }
