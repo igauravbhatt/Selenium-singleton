@@ -58,6 +58,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
+import core.base;
+
 public class AutomationAdvance_1 {
     WebDriver driver;
     String oldUrl;
@@ -68,31 +70,10 @@ public class AutomationAdvance_1 {
     public void setup(String browser, String urlp) {
 
         switch (browser) {
-            case "chrome":
-               // System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
-
-                // Enable verbose logging to see every internal command
-             //   System.setProperty("webdriver.chrome.verboseLogging", "true");
-                ChromeOptions options = new ChromeOptions();
-
-                // 🔴 THIS LINE IS NON-NEGOTIABLE
-                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
-                // server-safe options
-                options.addArguments("--window-size=1366,768");
-                options.addArguments("--disable-gpu");
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-             //   options.addArguments("--headless=new");   // 🔥 VERY IMPORTANT
-                 options.addArguments("--disable-extensions");
-                 options.addArguments("--disable-infobars");
-                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-               //  options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime());
-
-
-                driver = new ChromeDriver(options);
-
-                // fail fast instead of hanging
+            case "chrome":  
+            base.init();
+            this.driver = base.getdriver();
+            // fail fast instead of hanging
                 driver.manage().timeouts()
                         .pageLoadTimeout(Duration.ofSeconds(60));
 

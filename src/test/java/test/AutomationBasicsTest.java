@@ -2,7 +2,6 @@ package test;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import core.base;
+
 public class AutomationBasicsTest {
 
     WebDriver driver;
@@ -30,24 +31,8 @@ public class AutomationBasicsTest {
 
     @BeforeClass
     public void setup() {
-        ChromeOptions options = new ChromeOptions();
-      //  System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
-
-        // Enable verbose logging to see every internal command
-       // System.setProperty("webdriver.chrome.verboseLogging", "true");
-        // 🔴 THIS LINE IS NON-NEGOTIABLE
-        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
-        // server-safe options
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless=new");
-        //options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime());
-
-        driver = new ChromeDriver(options);
-
+        base.init();
+        this.driver = base.getdriver();
         // fail fast instead of hanging
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().timeouts().implicitlyWait(time);
@@ -59,6 +44,7 @@ public class AutomationBasicsTest {
     }
 
     @Test(enabled = true)
+    
     public void Textbox(Method method) {
         System.out.println("================ Started = " + method.getName() + " ================");
         WebElement nametxtbox = driver.findElement(By.id("name"));
@@ -222,7 +208,7 @@ public class AutomationBasicsTest {
     }
 
     @AfterClass(enabled = true)
-    public void teardown(Method method) throws InterruptedException {
+    public void teardown(){
           System.out.println("Basic test ended");
        if (driver != null) {
         driver.quit();
