@@ -87,6 +87,8 @@ public class AutomationAdvance_1 {
                  options.addArguments("--disable-extensions");
                  options.addArguments("--disable-infobars");
                  options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                 options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime()
+);
 
 
                 driver = new ChromeDriver(options);
