@@ -208,11 +208,9 @@ public class AutomationBasicsTest {
     }
 
     @AfterClass(enabled = true)
-<<<<<<< HEAD
+
     public void teardown(){
-=======
-    public void teardown() throws InterruptedException {
->>>>>>> 5b1970e3a6720db90b8b0f2fe75d6ff51ebe3d07
+
           System.out.println("Basic test ended");
        if (driver != null) {
         driver.quit();
