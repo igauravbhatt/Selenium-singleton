@@ -69,10 +69,10 @@ public class AutomationAdvance_1 {
 
         switch (browser) {
             case "chrome":
-                System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
+               // System.setProperty("webdriver.chrome.logfile", "C:\\temp\\chromedriver.log");
 
                 // Enable verbose logging to see every internal command
-                System.setProperty("webdriver.chrome.verboseLogging", "true");
+             //   System.setProperty("webdriver.chrome.verboseLogging", "true");
                 ChromeOptions options = new ChromeOptions();
 
                 // 🔴 THIS LINE IS NON-NEGOTIABLE
@@ -83,11 +83,11 @@ public class AutomationAdvance_1 {
                 options.addArguments("--disable-gpu");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--headless=new");   // 🔥 VERY IMPORTANT
+             //   options.addArguments("--headless=new");   // 🔥 VERY IMPORTANT
                  options.addArguments("--disable-extensions");
                  options.addArguments("--disable-infobars");
                  options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-                 options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime());
+               //  options.addArguments("--user-data-dir=C:\\Windows\\Temp\\chrome-" + System.nanoTime());
 
 
                 driver = new ChromeDriver(options);
